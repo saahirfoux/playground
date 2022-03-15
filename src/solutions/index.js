@@ -43,3 +43,43 @@ export const flatten = (ourArray) => {
     return newArray;
     
 };
+
+export const noDuplicates = (duplicates) => {
+    if (Array.isArray(duplicates)) {
+        let newArray = [];
+        // for each item in the array, remove all duplicate characters, in the same order as found. 
+        // loop thru each item
+        // for each character in each loop, rebuild a new string for each char as you go, do not include characters already added to the string
+        for (let x = 0; x < duplicates.length; x++) {
+            let current = duplicates[x].split('');
+            let stringSet = new Set();
+            for (let y = 0; y < current.length; y++) {
+                stringSet.add(current[y])
+            }
+            newArray.push(Array.from(stringSet).join(''));
+
+        }
+        return newArray;
+    } else {
+        let stringSet = new Set(duplicates);
+        return Array.from(stringSet).join('');
+    }
+};
+
+export const hiFrequency = (fArray) => {
+    let hiF = {
+        count: 0,
+        value: '', 
+        index: 0
+    };
+    for (let x = 0;  x < fArray.length; x++) {
+        console.log(fArray.filter(item => item === fArray[x]).length);
+        let numberOfOccurances = fArray.filter(item => item === fArray[x]).length;
+        if (numberOfOccurances > hiF.count) {
+            hiF.count = numberOfOccurances;
+            hiF.value = fArray[x];
+            hiF.index = x;
+        }
+    }
+    return fArray[hiF.index];
+}
